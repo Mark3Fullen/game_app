@@ -1,18 +1,20 @@
 import React from 'react'
 import { useState } from 'react';
-// import 'bootstrap/dist/css/bootstrap.css'
-import {Container,Row, Col, Card} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
 
 
 
-const GameList = ({game, setGames, deleteItem, onUpdateGame, search}) => {
+
+const GameList = ({game, deleteItem, onUpdateGame}) => {
 
   const [updatedName, setUpdatedName] = useState("");
   const [upDatedReleaseDate, setUpdatedReleaseDate] = useState("");
   const [updatedPrice, setUpdatedPrice] = useState("");
   const [updateImage, setupdateImage] = useState("");
   const [updateUpdateGenre, setUpdateUpdateGenre] = useState("");
-  
+
+  const [editing, setEditing] = useState(false);
+
 
 
   function handleDeleteClick() {
@@ -30,11 +32,11 @@ const GameList = ({game, setGames, deleteItem, onUpdateGame, search}) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         name: updatedName,
         release_date: upDatedReleaseDate,
         price: updatedPrice,
-        image: updateImage, 
+        image: updateImage,
         genre: updateUpdateGenre
     }),
     })
@@ -43,62 +45,82 @@ const GameList = ({game, setGames, deleteItem, onUpdateGame, search}) => {
       });
   }
 
+  function handleEdit(){
+    setEditing(!editing)
+  }
 
     return (
-      
-      <div >
-      <h3>Game Name: {game.name}</h3>
-      <h3>Release Date{game.release_date}</h3>
-      <h3>Price: ${game.price}</h3>
-      <h3>Genre: {game.genre}</h3>
-      <img src={game.image}></img>
+
+    <div className="container p-4 shadow text-center flex flex-col justify-between">
+        <div >
+
+      <img src={game.image} alt={game.name}></img>
+
+      <br />
+      <h5>Game Name: {game.name}</h5>
+
+      <h5>Release Date{game.release_date}</h5>
+
+      <h5>Price: ${game.price}</h5>
+
+      <h5>Genre: {game.genre}</h5>
+
+
 
                   <button onClick={handleDeleteClick}>Delete</button>
-                  <form onSubmit={handleGameFormSubmit}>
-                  <input
-                  type="text"
-                  placeholder="Game title"
-                  value={updatedName}
-                  onChange={(e) => setUpdatedName(e.target.value)}
-                  />
-                  <input
-                  type="text"
-                  placeholder="Price"
-                  value={upDatedReleaseDate}
-                  onChange={(e) => setUpdatedReleaseDate(e.target.value)}
-                  />
-                  <input
-                  type="number"
-                  placeholder="Date"
-                  value={updatedPrice}
-                  onChange={(e) => setUpdatedPrice(e.target.value)}
-                  />
-                  <input
-                  type="string"
-                  placeholder="Image"
-                  value={updateImage}
-                  onChange={(e) => setupdateImage(e.target.value)}
-                  />
-                     <input
-                  type="string"
-                  placeholder="Genre"
-                  value={updateUpdateGenre}
-                  onChange={(e) => setUpdateUpdateGenre(e.target.value)}
-                  />
-                  <button type="submit" >Save</button>
-                </form>
-      </div>
-       
-      //    <Card style={{ width: '18rem' }}>
-      //    <Card.Img variant="top" src="https://thumbs.dreamstime.com/b/video-game-controller-doodle-hand-drawn-vector-illustration-63395075.jpg" />
-      //    <Card.Body>
-      //      <Card.Title>{game.name}</Card.Title>
-      //      <Card.Text>
-          
-      //      </Card.Text>
-      //    </Card.Body>
-      //  </Card>
-        
+                  <button onClick={handleEdit}>{!editing? "Edit" : "Close"}</button>
+                    {editing?(
+                    <div>
+                    <form onSubmit={handleGameFormSubmit}>
+                    <input
+                    type="text"
+                    placeholder="Game title"
+                    value={updatedName}
+                    onChange={(e) => setUpdatedName(e.target.value)}
+                    />
+   <br />
+                    <input
+                    type="text"
+                    placeholder="Date"
+                    value={upDatedReleaseDate}
+                    onChange={(e) => setUpdatedReleaseDate(e.target.value)}
+                    />
+<br />
+                    <input
+                    type="number"
+                    placeholder="Price"
+                    value={updatedPrice}
+                    onChange={(e) => setUpdatedPrice(e.target.value)}
+                    />
+       <br />
+                    <input
+                    type="string"
+                    placeholder="Image"
+                    value={updateImage}
+                    onChange={(e) => setupdateImage(e.target.value)}
+                    />
+         <br />
+                      <input
+                    type="string"
+                    placeholder="Genre"
+                    value={updateUpdateGenre}
+                    onChange={(e) => setUpdateUpdateGenre(e.target.value)}
+                    />
+                    <br />
+                    <button type="submit" >Save</button>
+
+                  </form>
+                </div>
+                ) : (
+                  null)
+                    }
+
+
+
+
+
+            </div>
+          </div>
     )
 }
 

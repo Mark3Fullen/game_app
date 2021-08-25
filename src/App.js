@@ -5,10 +5,8 @@ import {
   Route,
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
-// import WishlistContainer from './components/WishlistContainer';
-import FrontPageContainer from './components/FrontPageContainer';
 import Body from './components/Body';
-import Searchbar from './components/Searchbar';
+
 import Equipment from './components/Equipment'
 
 function App() {
@@ -16,19 +14,13 @@ function App() {
     <Router>
       <Navbar />
       <Switch>
-        <Route path="/wishes">
-          {/* <WishlistContainer /> */}
-        </Route>
-        <Route path="/">
-          <FrontPageContainer />
-        </Route>
+      <Route exact path ="/" component={Body}/>
         <Route path="/equipment">
-          <Equipment/>
+         <Equipment/>
         </Route>
       </Switch>
-      <Body/>
     </Router>
-   
+
   );
 }
 
