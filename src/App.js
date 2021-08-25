@@ -5,7 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import WishlistContainer from './components/WishlistContainer';
+// import WishlistContainer from './components/WishlistContainer';
 import FrontPageContainer from './components/FrontPageContainer';
 import Body from './components/Body';
 import Searchbar from './components/Searchbar';
@@ -16,7 +16,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route path="/wishes">
-          <WishlistContainer />
+          {/* <WishlistContainer /> */}
         </Route>
         <Route path="/">
           <FrontPageContainer />
