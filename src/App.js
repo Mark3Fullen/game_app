@@ -11,6 +11,7 @@ import Equipment from './components/Equipment'
 
 function App() {
   return (
+
     <Router>
       <Navbar />
       <Switch>
